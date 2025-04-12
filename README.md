@@ -1,5 +1,6 @@
 # Stock-Makanan
 Menampilkan daftar makanan &amp; stok
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
