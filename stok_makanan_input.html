@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stok Makanan Interaktif</title>
   <style>
+    /* Styling for body and layout */
     body {
       font-family: Arial, sans-serif;
       background: #f2f2f2;
@@ -40,9 +41,18 @@
       border-bottom: 1px solid #ccc;
       text-align: left;
     }
-    .status.cukup { color: green; font-weight: bold; }
-    .status.hampir { color: orange; font-weight: bold; }
-    .status.habis { color: red; font-weight: bold; }
+    .status.cukup {
+      color: green;
+      font-weight: bold;
+    }
+    .status.hampir {
+      color: orange;
+      font-weight: bold;
+    }
+    .status.habis {
+      color: red;
+      font-weight: bold;
+    }
     .delete-btn {
       background: red;
       color: white;
@@ -75,15 +85,17 @@
   </table>
 
   <script>
+    // References to DOM elements
     const form = document.getElementById('form');
     const tabelBody = document.querySelector('#tabel tbody');
     const namaInput = document.getElementById('nama');
     const jumlahInput = document.getElementById('jumlah');
 
+    // Load or initialize local storage data
     let data = JSON.parse(localStorage.getItem('stokMakanan')) || [];
 
     function renderTable() {
-      tabelBody.innerHTML = '';
+      tabelBody.innerHTML = ''; // Clear existing table rows
       data.forEach((item, index) => {
         const tr = document.createElement('tr');
         const statusClass = item.jumlah.includes('0') ? 'habis' :
@@ -99,9 +111,9 @@
     }
 
     function hapus(index) {
-      data.splice(index, 1);
-      simpanData();
-      renderTable();
+      data.splice(index, 1); // Remove item by index
+      simpanData(); // Save changes to localStorage
+      renderTable(); // Re-render table
     }
 
     function simpanData() {
@@ -113,14 +125,15 @@
       const nama = namaInput.value.trim();
       const jumlah = jumlahInput.value.trim();
       if (nama && jumlah) {
-        data.push({ nama, jumlah });
-        simpanData();
-        renderTable();
+        data.push({ nama, jumlah }); // Add new item
+        simpanData(); // Save to localStorage
+        renderTable(); // Update UI
         namaInput.value = '';
         jumlahInput.value = '';
       }
     });
 
+    // Initial table rendering
     renderTable();
   </script>
 </body>
